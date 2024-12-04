@@ -79,11 +79,14 @@ body {
 
 main {
     flex-grow: 1;
+    
+    section{
+        padding: 8rem 10rem;
+        scroll-snap-align: start;
+    }
 }
 
-section {
-    scroll-snap-align: center;
-}
+
 
 span {
     font-family: "Nunito Sans", serif;
