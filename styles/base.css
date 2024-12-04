@@ -88,7 +88,7 @@ main {
 
 
 
-span {
+span, td {
     font-family: "Nunito Sans", serif;
     font-size: 1.5rem;
     line-height: 1.5;
@@ -143,8 +143,18 @@ nav ul a:hover:after {
 }
 
 
+
 footer#footer-container {
     padding: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 5rem;
+}
+
+footer#footer-container p {
+    margin:0;
 }
 
 footer#footer-container h3 {
@@ -156,11 +166,25 @@ footer#footer-container h3 {
     border-radius: 3px;
 }
 
-footer#footer-container ul li{
+footer#footer-container section#socials-container{
+    height: 100%;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+ }
+
+footer#footer-container section#socials-container a{
    text-decoration: none;
-   list-style-type: none;
+   color: var(--primary-color);
    font-size: 1.5rem;
    font-weight: 100;
+   width: 30px;
+   height: 30px;
+   background-color: var(--light-color);
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 button {
@@ -178,4 +202,12 @@ button:hover {
     color: var(--light-color);
     opacity: 100%;
     cursor: pointer;
+}
+
+th {
+    font-size: 2rem;
+}
+
+td {
+    font-size: 1.5rem;
 }
