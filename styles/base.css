@@ -18,6 +18,8 @@
 
 html {
     font-size: 62.5%; 
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4, h5{
@@ -77,6 +79,10 @@ body {
 
 main {
     flex-grow: 1;
+}
+
+section {
+    scroll-snap-align: center;
 }
 
 span {

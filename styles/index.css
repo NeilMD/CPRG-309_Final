@@ -33,6 +33,7 @@ main {
     
     section {
         padding: 8rem 10rem;
+        
 
         header h2 {
             margin: 0 0 5rem 0;
@@ -157,6 +158,7 @@ section#discover-wrapper button {
     border: 1px solid var(--secondary-color);
     flex: 1 0 30%;
     cursor: pointer;
+    position: relative;
     transition-property: transform;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
@@ -173,7 +175,7 @@ section#discover-wrapper button {
     z-index: -1;
     border-radius: 3px;
     clip-path: circle(0% at 0 100%);
-    transition: clip-path 0.7s ease-in-out;
+    transition: clip-path 0.8s ease-in-out;
 }
 
 .mood-container:hover {
@@ -182,8 +184,7 @@ section#discover-wrapper button {
 }
 
 .mood-container:hover:after {
-    clip-path: circle(200% at 0% 0%);
-    visibility: visible;
+    clip-path: circle(150% at 0% 0%);
 }
 
 .mood-container h5 {
