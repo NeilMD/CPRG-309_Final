@@ -11,3 +11,16 @@ function loadTemplate(templatePath, containerId) {
 // Load the header and footer templates
 loadTemplate('./templates/header.html', 'header-container');
 loadTemplate('./templates/footer.html', 'footer-container');
+
+
+// Getting templates
+async function getTemplate(templatePath) {
+    let elTemp=  await fetch(templatePath)
+    const htmlString = await elTemp.text();    // Wait for the text conversion of the response
+    const template = document.createElement('template');
+    template.innerHTML = htmlString.trim();      // Trim to avoid whitespace issues
+    return template.content.firstChild;  // Get the first child element
+}
+
+//API Key
+const API_KEY = 'c99cc5d3666194fc8e534e7681c87fca';

@@ -46,13 +46,14 @@ main {
 }
 
 /* Main grid container for all cards */
-.weekly-cards-container {
+#weekly-cards-container {
     padding: 2rem 5rem;
     display: grid;
     grid-template-columns: 45% 45%;
     grid-auto-flow: column;
     grid-template-rows: repeat(5, auto);
     justify-content: space-evenly;
+    
 }
 
 /* Each card is a subgrid */
@@ -65,6 +66,7 @@ main {
     padding: 2rem;
     cursor: pointer;
     border-radius: 8px;
+    overflow: hidden;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -94,6 +96,8 @@ main {
     margin: 0;
     line-height: 1.2rem;
     align-self: end; 
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
 
 }
 
@@ -135,9 +139,10 @@ section#discover-wrapper button {
 }
 
 .discover-card span {
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 200px;
+    display: block;
 }
 
 .discover-card > * {
