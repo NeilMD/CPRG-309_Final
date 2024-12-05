@@ -68,11 +68,14 @@ main {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    transition: background-color 0.7s ease-in-out;
 }
 
-.weekly-card:after {
-   content:'View more about the artist';
+.info-available {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.info-available:after {
+   content:'View Artist';
    position: absolute;
    bottom: 0;
    right: 0;
@@ -82,9 +85,27 @@ main {
    color: var(--secondary-color);
    margin: 0.5rem;
    transition: opacity 0.5s ease-in-out;
+   
 }
+.info-none {
+    opacity: 0;
+    cursor: not-allowed;
+    transition: opacity 0.5s ease-in-out;
+}
+.info-none:after {
+    content:'No Artist Info';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1.3rem;
+    overflow: hidden;
+    opacity: 0;
+    color: var(--secondary-color);
+    margin: 0.5rem;
+ }
 
-.weekly-card:hover:after{
+.info-available:hover:after,
+.info-none:hover:after{
     opacity: 1;
 }
 

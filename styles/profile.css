@@ -1,6 +1,6 @@
 
 .parallax-wrapper {
-    height: 50vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -9,6 +9,8 @@
     padding: 0;
     background-color: var(--secondary-color);
     z-index: 1;
+    background-image: url('../assets/profile_bg.png');
+    background-size: cover;
 }
 
 .parallax-wrapper::after {
@@ -35,11 +37,18 @@
 
 .profile-wrapper {
     position: relative;
+    transform: translateY(-10vh);
+    z-index: 3;
+    padding-top:4rem;
 }
 
 .profile-wrapper h2{
-    margin: 0 0 1rem 0;
-   
+    margin: 0 0 2rem 0;
+}
+
+#profile-summary {
+    display: inline-block;
+    width: clamp(300px, 100ch, 100ch)
 }
 
 .music-container {
@@ -49,6 +58,11 @@
         font-weight: 700;
     }
 }
+
+.music-tr:nth-of-type(1){
+    display: none;
+}
+
 
 td{
     border-bottom: 1px solid var(--secondary-color);
@@ -67,6 +81,14 @@ th, td:not(td:nth-child(1)) {
 
 td {
     font-size: 100;
+}
+
+td a {
+    text-decoration: none;
+    color: var(--light-color);
+}
+td a:hover {
+    color: var(--accent-color);
 }
 
 tr:hover:not(tr:has(th)) {

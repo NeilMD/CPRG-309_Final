@@ -4,20 +4,6 @@ const backgroundColors = [
   '#1ED760', '#1ED760', '#D71E1E',   '#17a2b8', '#28a745', '#ffc107',   '#f8f9fa',  '#343a40',  '#007bff',  '#ff5733' 
 ];
 
-//API get Data
-async function getData(url, fn) {
-  try {
-    let response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    let json = await response.json();
-    fn(json)
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
 let artistMbid =[];
 const addTrendingData = async(json) => {
   let tracks = json.tracks.track;
@@ -27,7 +13,7 @@ const addTrendingData = async(json) => {
   
   for (let i = 0; i < tracks.length; i++) {
     let el = elTemp.cloneNode(true);
-
+    el.setAttribute("data-mbid", tracks[i].artist.mbid);
     el.getElementsByClassName('artist-name')[0].innerText = tracks[i].artist.name;
     el.getElementsByClassName('music-name')[0].innerText = tracks[i].name;
     el.getElementsByClassName('order')[0].innerText = `#${i+1}`;
@@ -124,6 +110,7 @@ const addGenreData = async(json) =>{
 
 
 const addBehavior = () => {
+  // Scroll
   window.addEventListener('scroll', function(){
       let msg = this.document.getElementById("landing-msg");
       msg.style.transform = `translateY(-${window.scrollY/3}px)`;
@@ -155,5 +142,20 @@ const addBehavior = () => {
   });
 
   focus.forEach(im => slideObserver.observe(im));
+  document.querySelectorAll('.weekly-card').forEach(el => {
+    
+    const mbid = el.getAttribute("data-mbid");
+    const url = `./profile.html?mbid=${mbid}`;
+    
+    if (!mbid || mbid === '') {
+        el.classList.add('info-none'); 
+        return;
+    } 
+
+    el.classList.add('info-available');
+    el.addEventListener('click', elClick=>{     
+      window.location.href = url;
+    })
+  })
 }
 

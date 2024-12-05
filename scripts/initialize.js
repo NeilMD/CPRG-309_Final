@@ -24,3 +24,16 @@ async function getTemplate(templatePath) {
 
 //API Key
 const API_KEY = 'c99cc5d3666194fc8e534e7681c87fca';
+//API get Data
+async function getData(url, fn) {
+    try {
+      let response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      let json = await response.json();
+      fn(json)
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
