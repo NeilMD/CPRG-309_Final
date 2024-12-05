@@ -1,4 +1,5 @@
 const urlTopTracks = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json&limit=10`;
+const urlTogTags = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=${API_KEY}&format=json&limit=9`;
 const backgroundColors = [
   '#1ED760', '#1ED760', '#D71E1E',   '#17a2b8', '#28a745', '#ffc107',   '#f8f9fa',  '#343a40',  '#007bff',  '#ff5733' 
 ];
@@ -80,7 +81,7 @@ const addDiscoverData = async(json) =>{
     
   }
   document.getElementById('discover-container').appendChild(fragment);
-  addBehavior();
+  getData(urlTogTags, addGenreData);
 }
 
 const getImage = async(searchKey, searchArtist) => {
@@ -99,20 +100,27 @@ const getImage = async(searchKey, searchArtist) => {
   return json
 }
 
+const addGenreData = async(json) =>{
+  let tag = json?.tags?.tag;
+  let elTemp = await getTemplate('./templates/genre-card.html');
+  let fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < tag.length; i++) {
+    let el = elTemp.cloneNode(true);
+    console.log(el)
+    el.getElementsByClassName('mood-name')[0].innerText = tag[i].name;
+    el.setAttribute("data-genre",tag[i].name);
+    fragment.appendChild(el); 
+    
+  }
+  
+  document.getElementById('mood-wrapper').appendChild(fragment);
+  addBehavior();
+}
+
 (async function(){
   await getData(urlTopTracks, addTrendingData);
 })();
-// const addImage = async (tracks)=>{
-//   let url = 'https://musicbrainz.org/ws/2/release/64f0d73-1234-4e2c-8743-d77bf2191051';  // Your API endpoint or URL
-//   let response = await fetch(url, {
-//     method: 'GET',  // Or 'POST' if you're making a POST request
-//     headers: {
-//       'User-Agent': 'CPRG310/1.2.0 (http://https://github.com/NeilMD/CPRG-309_Final/deployments/github-pages)',
-//       'Contact': 'aws.neilcapistra@gmail.com',  // Optional: Custom header for email or contact information
-//       // Add other headers here if needed
-//     }
-//   });
-// }
 
 
 
