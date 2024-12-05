@@ -1,4 +1,7 @@
 const urlTopTracks = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json&limit=10`;
+const backgroundColors = [
+  '#1ED760', '#1ED760', '#D71E1E',   '#17a2b8', '#28a745', '#ffc107',   '#f8f9fa',  '#343a40',  '#007bff',  '#ff5733' 
+];
 
 //API get Data
 async function getData(url, fn) {
@@ -28,6 +31,7 @@ const addTrendingData = async(json) => {
     el.getElementsByClassName('order')[0].innerText = `#${i+1}`;
     let imgSrc = await getImage(tracks[i].name,tracks[i].artist.name);
     el.getElementsByClassName("card-img")[0].src = imgSrc?.track?.album?.image[2]['#text'] ??  '';
+    el.getElementsByClassName("card-img")[0].style.backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
     fragment.appendChild(el); 
     artistMbid.push(tracks[i].artist.mbid);
   }
@@ -71,6 +75,7 @@ const addDiscoverData = async(json) =>{
     el.getElementsByClassName('discover-desc')[0].innerText = `Discover songs from ${arrObjDiscover[i].artist.name}`;
     el.getElementsByClassName('discover-name')[0].innerText = arrObjDiscover[i].name;
     el.getElementsByClassName("discover-img")[0].src = arrObjDiscover[i].image[2]['#text']
+    el.getElementsByClassName("discover-img")[0].style.backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
     fragment.appendChild(el); 
     
   }
