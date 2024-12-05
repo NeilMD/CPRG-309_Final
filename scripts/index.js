@@ -27,6 +27,7 @@ const addTrendingData = async(json) => {
   
   for (let i = 0; i < tracks.length; i++) {
     let el = elTemp.cloneNode(true);
+
     el.getElementsByClassName('artist-name')[0].innerText = tracks[i].artist.name;
     el.getElementsByClassName('music-name')[0].innerText = tracks[i].name;
     el.getElementsByClassName('order')[0].innerText = `#${i+1}`;
@@ -50,7 +51,6 @@ const addDiscoverData = async(json) =>{
   let arrObjDiscover = [];
   let urlTopAlbum, response, albJson, random;
   for (let i = 0 ; i < artistMbid.length; i++){  
-    console.log('befpre if')
     if (artistMbid[i] === "") {
       continue
     }
@@ -61,7 +61,7 @@ const addDiscoverData = async(json) =>{
       let albums = albJson?.topalbums?.album ?? [];
       
       // Only proceed if albums is a non-empty array
-      if (albums.length > 0 && albums != "") {
+      if (albums.length > 0 && albums != "" && albums != "(null)") {
         // Get a random album from the array
         randomAlbum = albums[Math.floor(Math.random() * albums.length)];
         arrObjDiscover.push(randomAlbum);
@@ -107,7 +107,6 @@ const addGenreData = async(json) =>{
 
   for (let i = 0; i < tag.length; i++) {
     let el = elTemp.cloneNode(true);
-    console.log(el)
     el.getElementsByClassName('mood-name')[0].innerText = tag[i].name;
     el.setAttribute("data-genre",tag[i].name);
     fragment.appendChild(el); 

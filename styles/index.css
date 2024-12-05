@@ -67,13 +67,27 @@ main {
     cursor: pointer;
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+    position: relative;
+    transition: background-color 0.7s ease-in-out;
 }
 
-.weekly-card:hover {
-    transform: translate(5px,-5px);
-    background-color: rgba(0, 0, 0, 0.6);
+.weekly-card:after {
+   content:'View more about the artist';
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   font-size: 1.3rem;
+   overflow: hidden;
+   opacity: 0;
+   color: var(--secondary-color);
+   margin: 0.5rem;
+   transition: opacity 0.5s ease-in-out;
 }
+
+.weekly-card:hover:after{
+    opacity: 1;
+}
+
 
 .weekly-card h2 {
     grid-row: 1 / span 2; 
@@ -104,7 +118,9 @@ main {
 .weekly-card span {
     grid-row: 2 / 3; 
     grid-column: 3 / span 4;
-    color: var(--secondary-color);
+    color: var(--light-color);
+    font-weight: 800;
+    opacity: 90%;
     align-self: start;
 }
 
@@ -129,13 +145,14 @@ section#discover-wrapper button {
 .discover-card {
     scroll-snap-type: x mandatory;
     width: 200px;
-    filter: grayscale(70%);
+    filter: grayscale(0);
     transition: filter 0.5s ease-in-out;
+    position: relative;
     cursor: pointer;
 }
 
 .discover-card:hover {
-    filter: grayscale(0);
+    filter: grayscale(100%);
 }
 
 .discover-card span {
