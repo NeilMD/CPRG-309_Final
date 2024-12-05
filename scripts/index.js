@@ -1,4 +1,4 @@
-const urlTopTracks = `http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json&limit=10`;
+const urlTopTracks = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json&limit=10`;
 
 //API get Data
 async function getData(url, fn) {
@@ -49,7 +49,7 @@ const addDiscoverData = async(json) =>{
     if (artistMbid[i] === "") {
       continue
     }
-    urlTopAlbum = `http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=${artistMbid[i]}&api_key=${API_KEY}&format=json`;
+    urlTopAlbum = `https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=${artistMbid[i]}&api_key=${API_KEY}&format=json`;
     try {
       response = await fetch(urlTopAlbum);
       albJson = await response.json();
@@ -66,7 +66,6 @@ const addDiscoverData = async(json) =>{
     }
    
   }
-  console.log(arrObjDiscover)
   for (let i = 0; i < arrObjDiscover.length; i++) {
     let el = elTemp.cloneNode(true);
     el.getElementsByClassName('discover-desc')[0].innerText = `Discover songs from ${arrObjDiscover[i].artist.name}`;
@@ -83,7 +82,7 @@ const getImage = async(searchKey, searchArtist) => {
   let imgSrc = '';
   let json;
   try {
-    let response = await fetch(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=c99cc5d3666194fc8e534e7681c87fca&artist=${searchArtist}&track=${searchKey}&format=json&autocorrect=1`);
+    let response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=c99cc5d3666194fc8e534e7681c87fca&artist=${searchArtist}&track=${searchKey}&format=json&autocorrect=1`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
