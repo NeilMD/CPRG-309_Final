@@ -1,0 +1,80 @@
+
+
+main {
+    section {
+      padding: 8rem 10rem;
+      padding-top: 8rem;
+      scroll-snap-align: start;
+    }
+}
+
+#logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+span.logo-wrapper{
+    background-image: var(--gradient);
+    background-size: cover; /* Ensures the background image covers the container */
+    background-position: center; /* Position the background */
+    mask-repeat: no-repeat;
+    height: 180px;
+    width: 500px;
+    mask-image: url('../assets/logomark.svg');
+    font-size: 8rem;
+    color: black;
+    animation: hue 10s infinite linear;
+}
+
+span#logo-desc{
+    width: 500px;
+}
+
+.member-img {
+    background-image: url('../assets/member_frame.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    mask-image: url('../assets/member_frame.svg'); /* Apply mask to clip the background */
+    mask-size: contain;
+    mask-position: center;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+.member-section {
+    padding: 5rem 15rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    align-items: center;
+}
+
+.member-section:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+.member-section:nth-of-type(odd) {
+    flex-direction: row;
+}
+
+.member-header {
+    display: flex;
+    justify-content: center;
+}
+
+.member-main {
+    flex-grow: 0;
+}
+
+.member-main span {
+    width: 370px;
+    font-size: 1.5rem;
+    display: block;
+}

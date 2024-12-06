@@ -27,7 +27,8 @@ const fillAlbumHeader = (json) =>{
     document.getElementById("album-img").src = album?.image[2]['#text']
     document.getElementById("album-name").innerText = album.name;
     document.getElementById("album-artist").innerText = album.artist
-    document.getElementById("album-genre").innerText = album.tags.tag.map(item => item.name).join(', ');
+    let tag = typeof album.tags?.tag === 'object' && !Array.isArray(album.tags?.tag) ? [album.tags?.tag] : album.tags?.tag;
+    document.getElementById("album-genre").innerText = tag.map(item => item.name).join(', ') ?? 'No Info';
     document.getElementById("album-year").innerText = album.wiki?.published ? new Date(album.wiki.published).getFullYear() : 'No info'
     document.getElementById("album-desc").innerHTML = album.wiki?.summary ?? 'No info'
 

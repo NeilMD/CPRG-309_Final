@@ -15,14 +15,6 @@ h1 {
     animation: hue 10s infinite linear;
 }
 
-@keyframes hue {
-    from {
-        -webkit-filter: hue-rotate(0deg);
-    }
-    to {
-        -webkit-filter: hue-rotate(-360deg);
-    }
-}
 
 hr {
     border: 0.5px solid var(--secondary-color);
