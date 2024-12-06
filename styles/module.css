@@ -3,16 +3,33 @@
 .discover-card {
     scroll-snap-type: x mandatory;
     width: 200px;
-    filter: grayscale(0);
     transition: filter 0.5s ease-in-out;
     position: relative;
     cursor: pointer;
 }
 
-.discover-card:hover {
-    filter: grayscale(100%);
+.discover-card:after {
+    content: 'View Album';
+    font-size: 2.2rem;
+    color: var(--accent-color);
+    font-weight: 800;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    opacity: 0;
+    backdrop-filter:blur(10px);
+    filter: none;
+    transition: opacity 0.5s ease-in-out;
 }
 
+.discover-card:hover:after {
+    opacity: 1;
+}
 .discover-card span {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -45,6 +45,9 @@ const fillTopAlbums = async(json) => {
     const album = json.topalbums.album;
     for (let i = 0; i < album.length; i++) {
         let el = elTemp.cloneNode(true);
+        console.log(album[i])
+        el.setAttribute('data-albumname', album[i].name);
+        el.setAttribute('data-artist', album[i].artist.name);
         el.getElementsByClassName('discover-name')[0].innerText = album[i].name;
         el.getElementsByClassName("discover-img")[0].src = album[i].image[2]['#text'];
         el.getElementsByClassName("discover-img")[0].style.backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
@@ -52,12 +55,25 @@ const fillTopAlbums = async(json) => {
         if (album[i].name == '(null)') {
             continue
         }
-        console.log(el)
         fragment.appendChild(el); 
 
     }
     console.log(album,fragment)
     document.getElementById('discover-container').appendChild(fragment);
+    addBehavior();
+}
+
+const addBehavior = () =>{
+    document.querySelectorAll('.discover-card').forEach(el => {
+    
+        const albumname = el.getAttribute("data-albumname");
+        const artist = el.getAttribute("data-artist");
+        const url = `./album.html?artist=${artist}&albumname=${albumname}`;
+
+        el.addEventListener('click', elClick=>{     
+            window.location.href = url;
+        })
+    });
 }
 
 getArtistData();

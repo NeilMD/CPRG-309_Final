@@ -167,12 +167,6 @@ const addBehavior = () => {
     const artist = el.getAttribute("data-artist");
     const url = `./album.html?artist=${artist}&albumname=${albumname}`;
     
-    // if (!mbid || mbid === '') {
-    //     el.classList.add('info-none'); 
-    //     return;
-    // } 
-
-    // el.classList.add('info-available');
     el.addEventListener('click', elClick=>{     
       window.location.href = url;
     })
