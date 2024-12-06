@@ -43,7 +43,6 @@ const addDiscoverData = async(json) =>{
       response = await fetch(urlTopAlbum);
       albJson = await response.json();
       let albums = albJson?.topalbums?.album ?? [];
-      
       // Only proceed if albums is a non-empty array
       if (albums.length > 0 && albums != "") {
         // Get a random album from the array
@@ -57,6 +56,8 @@ const addDiscoverData = async(json) =>{
   }
   for (let i = 0; i < arrObjDiscover.length; i++) {
     let el = elTemp.cloneNode(true);
+    el.setAttribute('data-albumname', arrObjDiscover[i].name);
+    el.setAttribute('data-artist', arrObjDiscover[i].artist.name);
     el.getElementsByClassName('discover-desc')[0].innerText = `Discover songs from ${arrObjDiscover[i].artist.name}`;
     el.getElementsByClassName('discover-name')[0].innerText = arrObjDiscover[i].name;
     el.getElementsByClassName("discover-img")[0].src = arrObjDiscover[i].image[2]['#text'];
@@ -158,6 +159,23 @@ const addBehavior = () => {
     el.addEventListener('click', elClick=>{     
       window.location.href = url;
     })
-  })
+  });
+
+  document.querySelectorAll('.discover-card').forEach(el => {
+    
+    const albumname = el.getAttribute("data-albumname");
+    const artist = el.getAttribute("data-artist");
+    const url = `./album.html?artist=${artist}&albumname=${albumname}`;
+    
+    // if (!mbid || mbid === '') {
+    //     el.classList.add('info-none'); 
+    //     return;
+    // } 
+
+    // el.classList.add('info-available');
+    el.addEventListener('click', elClick=>{     
+      window.location.href = url;
+    })
+  });
 }
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/module.css">
+    <link rel="stylesheet" href="./styles/state.css">
+    <link rel="stylesheet" href="./styles/album.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <script src="./scripts/initialize.js" defer></script>
+    <script src="./scripts/album.js" defer></script>
+    
+</head>
+<body>
+    <header id="header-container"></header>
+    <main>
+        <section id="info-wrapper">
+            <header id="album-header">
+            <img id="album-img" alt="Album Cover" width="250" height="250">
+            </header>
+            <main id="album-main">
+                <h3 id="album-name"></h3>
+                <hr>
+                <p><strong>Artist: </strong> <span id="album-artist"></span></p>
+                <p><strong>Genre: </strong><span id="album-genre"></span> </p>
+                <p><strong>Year: </strong><span id="album-year"></span></p>
+                <p><strong>Description: </strong> <span id="album-desc"></span></p>
+            </main>
+            
+        </section>
+        
+        <section id="songs-wrapper">
+            <table id="songs-table" width="70%">
+                <thead>
+                    <tr>
+                        <th colspan="3">Tracklist</th>
+                    </tr>
+                </thead>
+                <tbody id="songs-tbody">
+                    <tr class="songs-tr">
+                        <td width="5%" class="song-num"></td>
+                        <td width="75%" class="song-name"></td>
+                        <td width="20%" class="song-duration"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer id="footer-container"></footer>
+</body>
+</html>

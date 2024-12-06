@@ -28,16 +28,30 @@ const API_KEY = 'c99cc5d3666194fc8e534e7681c87fca';
 async function getData(url, fn) {
     try {
       let response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
       let json = await response.json();
+      if (!response.ok) {
+        if (json.message == 'Album not found') {
+          fn(json);
+          return;
+        } else{
+          throw new Error(`Response status: ${response.status}`);
+        }
+        
+      }
       fn(json)
     } catch (error) {
+     
       console.error(error.message);
     }
 }
 
 const backgroundColors = [
-  '#1ED760', '#1ED760', '#D71E1E',   '#17a2b8', '#28a745', '#ffc107',   '#f8f9fa',  '#343a40',  '#007bff',  '#ff5733' 
+  '#1ED760', // Green
+  '#8A2BE2', // Blue-Violet
+  '#D71E1E', // Red
+  '#17a2b8', // Teal
+  '#28a745', // Green
+  '#ffc107', // Yellow
+  '#007bff', // Blue
+  '#ff5733'  // Orange
 ];
