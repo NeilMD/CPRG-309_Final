@@ -27,8 +27,11 @@ const fillAlbumHeader = (json) =>{
     document.getElementById("album-img").src = album?.image[2]['#text']
     document.getElementById("album-name").innerText = album.name;
     document.getElementById("album-artist").innerText = album.artist
-    let tag = typeof album.tags?.tag === 'object' && !Array.isArray(album.tags?.tag) ? [album.tags?.tag] : album.tags?.tag;
-    document.getElementById("album-genre").innerText = tag.map(item => item.name).join(', ') ?? 'No Info';
+    if (album.tags) {
+        let tag = typeof album.tags?.tag === 'object' && !Array.isArray(album.tags?.tag) ? [album.tags?.tag] : album.tags?.tag;
+        document.getElementById("album-genre").innerText = tag.map(item => item.name).join(', ') ?? 'No Info';
+    }
+    
     document.getElementById("album-year").innerText = album.wiki?.published ? new Date(album.wiki.published).getFullYear() : 'No info'
     document.getElementById("album-desc").innerHTML = album.wiki?.summary ?? 'No info'
 
@@ -36,7 +39,6 @@ const fillAlbumHeader = (json) =>{
 }
 
 const fillTrackData = (track) =>{
-    console.log(track)
     // If no tracks
     if (!track) {
         let elNoTracks = `<tr><td id='no-tracks' colspan='3'> No Tracks Found.</td></tr>`
