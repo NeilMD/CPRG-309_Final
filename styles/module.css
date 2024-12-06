@@ -1,0 +1,26 @@
+/* Discover card */
+
+.discover-card {
+    scroll-snap-type: x mandatory;
+    width: 200px;
+    filter: grayscale(0);
+    transition: filter 0.5s ease-in-out;
+    position: relative;
+    cursor: pointer;
+}
+
+.discover-card:hover {
+    filter: grayscale(100%);
+}
+
+.discover-card span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+}
+
+.discover-card > * {
+    padding: 0rem;
+    margin: 0;
+}

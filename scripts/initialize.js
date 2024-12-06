@@ -36,4 +36,8 @@ async function getData(url, fn) {
     } catch (error) {
       console.error(error.message);
     }
-  }
+}
+
+const backgroundColors = [
+  '#1ED760', '#1ED760', '#D71E1E',   '#17a2b8', '#28a745', '#ffc107',   '#f8f9fa',  '#343a40',  '#007bff',  '#ff5733' 
+];

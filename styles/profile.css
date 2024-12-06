@@ -83,15 +83,23 @@ td {
     font-size: 100;
 }
 
-td a {
+td a,
+#profile-summary a {
     text-decoration: none;
-    color: var(--light-color);
+    color: var(--secondary-color);
 }
-td a:hover {
+td a:hover,
+#profile-summary a:hover {
     color: var(--accent-color);
 }
 
 tr:hover:not(tr:has(th)) {
    color: var(--secondary-color);
    cursor: pointer;
+}
+
+#discover-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
 }

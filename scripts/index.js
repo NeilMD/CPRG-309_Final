@@ -1,8 +1,6 @@
 const urlTopTracks = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json&limit=10`;
 const urlTogTags = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=${API_KEY}&format=json&limit=9`;
-const backgroundColors = [
-  '#1ED760', '#1ED760', '#D71E1E',   '#17a2b8', '#28a745', '#ffc107',   '#f8f9fa',  '#343a40',  '#007bff',  '#ff5733' 
-];
+
 
 let artistMbid =[];
 const addTrendingData = async(json) => {
@@ -47,7 +45,7 @@ const addDiscoverData = async(json) =>{
       let albums = albJson?.topalbums?.album ?? [];
       
       // Only proceed if albums is a non-empty array
-      if (albums.length > 0 && albums != "" && albums != "(null)") {
+      if (albums.length > 0 && albums != "") {
         // Get a random album from the array
         randomAlbum = albums[Math.floor(Math.random() * albums.length)];
         arrObjDiscover.push(randomAlbum);
@@ -61,8 +59,12 @@ const addDiscoverData = async(json) =>{
     let el = elTemp.cloneNode(true);
     el.getElementsByClassName('discover-desc')[0].innerText = `Discover songs from ${arrObjDiscover[i].artist.name}`;
     el.getElementsByClassName('discover-name')[0].innerText = arrObjDiscover[i].name;
-    el.getElementsByClassName("discover-img")[0].src = arrObjDiscover[i].image[2]['#text']
-    el.getElementsByClassName("discover-img")[0].style.backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
+    el.getElementsByClassName("discover-img")[0].src = arrObjDiscover[i].image[2]['#text'];
+    el.getElementsByClassName("discover-img")[0].style.backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+    // Check if there is bad data from API
+    if (arrObjDiscover[i].name == '(null)') {
+      continue
+    }
     fragment.appendChild(el); 
     
   }
