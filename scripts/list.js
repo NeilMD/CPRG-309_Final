@@ -1,103 +1,102 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const page = urlParams.get('page');
+
+// Elements
+const pgInput = document.getElementById('page-input');
+let currPage = parseInt(pgInput.getAttribute('placeholder')) || 1;
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const searchInput = document.getElementById('search-input');
+const searchTbody = document.getElementById('search-tbody');
+const lastPageDisplay = document.getElementById('last-page');
 let url;
 
-
+// Fetch and load data based on the current page and genre
 const getPageData = async () => {
+
     
     if (page === 'home') {
-        document.getElementById('search-input').style.display = 'none';
+        // Hompage > Mood Genre
+
+
+        searchInput.style.display = 'none';
         const genre = urlParams.get('genre');
         url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${genre}&api_key=${API_KEY}&limit=10&format=json`;
-        
+
         await getData(url, fillGenreData);
-    } else if (page === 'nav') {
-
+    } else if (page === 'nav') { 
+        // Nav > Music, Artist
     }
+};
 
-    
-}
-
+// Fill the table with genre track data
 const fillGenreData = (json) => {
-    let tracks = json.tracks.track;
+    let tracks = json.tracks.track || [];
 
-    const pageInput = document.getElementById('page-input');
-    let placeholderValue = pageInput ? parseInt(pageInput.getAttribute('placeholder')) || 0 : 0;
+    const maxPage = Math.min(parseInt(json.tracks['@attr'].totalPages, 10), 1000);
 
-    let currRank = placeholderValue != 1 ? (placeholderValue * 10) : 0;
+    // Set Nav
+    pgInput.setAttribute('placeholder', json.tracks['@attr'].page);
+    pgInput.setAttribute('max', maxPage);
+    lastPageDisplay.innerText = maxPage;
 
-    
+    // Calculate Rank
+    let currRank = (currPage - 1) * 10;
+
+    // Clear previous rows except the template
+    clearTableRows();
+
     if (tracks.length > 10) {
-        // Prevent currRank from exceeding array bounds
         currRank = Math.min(currRank, tracks.length - 10);  
         tracks = tracks.slice(currRank, currRank + 10); 
     }
 
-    for (let i = 0; i <tracks.length; i++) {
-        let elTemp = document.getElementsByClassName('search-tr')[0].cloneNode(true);
-        elTemp.getElementsByClassName('search-rank')[0].innerHTML = `#${i + 1 + currRank }`;
-        elTemp.getElementsByClassName('search-title')[0].innerHTML = tracks[i].name;
-        elTemp.getElementsByClassName('search-artist')[0].innerHTML = tracks[i].artist.name;
-        elTemp.getElementsByClassName('search-link')[0].innerHTML = `<a href=${tracks[i].url}>See FM Link</a>`;
-        document.getElementById('search-tbody').insertAdjacentElement('beforeend', elTemp);
-    }
-    document.getElementById('page-input').setAttribute('placeholder', json.tracks['@attr']['page']);
-    document.getElementById('page-input').setAttribute('max', json.tracks['@attr']['totalPages']);
-    document.getElementById('last-page').innerText = json.tracks['@attr']['totalPages'];
+    tracks.forEach((track, index) => {
+        const elTemp = document.querySelector('.search-tr').cloneNode(true);
+        elTemp.querySelector('.search-rank').textContent = `#${index + 1 + currRank}`;
+        elTemp.querySelector('.search-title').textContent = track.name;
+        elTemp.querySelector('.search-artist').textContent = track.artist.name;
+        elTemp.querySelector('.search-link').innerHTML = `<a href="${track.url}">See FM Link</a>`;
+        searchTbody.appendChild(elTemp);
+    });
+};
 
-    
-}
+// Add event listeners for pagination and form submission
+const addBehavior = () => {
+    prevBtn.addEventListener('click', () => changePage(currPage - 1));
+    nextBtn.addEventListener('click', () => changePage(currPage + 1));
 
-const addBehavior = ()=> {
-    
-    
+    document.getElementById('page-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputPage = parseInt(pgInput.value, 10);
+        if (!isNaN(inputPage)) changePage(inputPage);
+    });
+};
 
-    document.getElementById('prev-btn').addEventListener('click', async(el)=>{
-        let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
-        if (el.target.classList.contains('disabled')){
-            el.preventDefault();
-            return;
-        } 
-        const urlParams = `${url}&page=${currPage-1}`;
-        document.getElementById('page-input').setAttribute('placeholder', --currPage);
-        console.log(document.getElementById('page-input').getAttribute('placeholder'));
-        clear();
-        await getData(urlParams, fillGenreData);
+// Handle page changes
+const changePage = async (newPage) => {
+    if (newPage < 1 || newPage > parseInt(pgInput.getAttribute('max'), 10)) return;
+
+    pgInput.setAttribute('placeholder', newPage);
+    clearTableRows();
+    currPage = newPage;
+
+    const newUrl = `${url}&page=${newPage}`;
+    await getData(newUrl, fillGenreData);
+};
+
+// Clear table rows except the first template row
+const clearTableRows = () => {
+    searchTbody.querySelectorAll('tr.search-tr').forEach((row, index) => {
+        if (index !== 0) row.remove();
     });
 
-    document.getElementById('next-btn').addEventListener('click', async()=>{
-        let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
-        const urlParams = `${url}&page=${currPage+1}`;
-        document.getElementById('page-input').setAttribute('placeholder', ++currPage);
-        clear();
-        await getData(urlParams, fillGenreData);
-    });
-
-    document.getElementById('page-form').addEventListener('submit', async(el)=>{
-        el.preventDefault()
-        
-        let page = document.getElementById('page-input').value;
-        const urlParams = `${url}&page=${page}`;
-        document.getElementById('page-input').setAttribute('placeholder', page);
-        clear();
-        await getData(urlParams, fillGenreData);
-    });
-}
-
-const clear = () => {
-    let elTr = document.querySelectorAll('tr.search-tr');
-    elTr.forEach((el, index) => {
-    if (index !== 0) {
-        el.remove(); // Remove all but the first row
-    }
-    });
-    let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
-    currPage == 1  ? document.getElementById('prev-btn').classList.add('disabled') : document.getElementById('prev-btn').classList.remove('disabled');
-    document.getElementById('search-input').value = '';
-    document.getElementById('page-input').value = '';
-
-}
+    prevBtn.classList.toggle('disabled', currPage === 1);
+    nextBtn.classList.toggle('disabled', currPage === parseInt(lastPageDisplay.innerText, 10));
+    searchInput.value = '';
+    pgInput.value = '';
+};
 
 getPageData();
 addBehavior();

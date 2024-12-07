@@ -5,7 +5,7 @@ const getAlbumData = async() => {
     const albumname = urlParams.get('albumname');
     const artist = urlParams.get('artist');
 
-    const urlAlbumInfo = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${API_KEY}&album=${albumname}&artist=${artist}&format=json`;
+    const urlAlbumInfo = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${API_KEY}&album=${albumname}&artist=${artist}&autocorrect=1&format=json`;
 
     await getData(urlAlbumInfo, fillAlbumHeader);
 }

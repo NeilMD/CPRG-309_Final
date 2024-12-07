@@ -98,6 +98,7 @@
     width: 10ch;
     padding: 0;
     text-align: center;
+    appearance: textfield;
 }
 .page {
     width: fit-content;

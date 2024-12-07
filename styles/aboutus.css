@@ -2,8 +2,8 @@
 
 main {
     section {
-      padding: 8rem 10rem;
-      padding-top: 8rem;
+      padding: 30rem 10rem 8rem 10rem;
+      
       scroll-snap-align: start;
     }
 }

@@ -26,7 +26,7 @@ const fillSongData = (json) => {
         let elTd = document.getElementsByClassName("music-tr")[0].cloneNode(true);
         elTd.getElementsByClassName('td-song')[0].innerText = track.name;
         elTd.getElementsByClassName('td-artist')[0].innerText = track.artist.name;
-        elTd.getElementsByClassName('td-count')[0].innerText = parseInt(track.playcount).toLocaleString();
+        elTd.getElementsByClassName('td-count')[0].innerText = parseInt(track.playcount, 10).toLocaleString();
         let elA = document.createElement('a');
         elA.setAttribute('href',track.url);
         elA.innerText = `${track.name} Link`

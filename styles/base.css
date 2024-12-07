@@ -75,6 +75,11 @@ body {
     margin: 0;
     background-color: var(--primary-color);
     color: var(--gray-color);
+    align-items: center;
+
+    main {
+        width: clamp(300px, 100%, 1440px);
+    }
 }
 
 main {
