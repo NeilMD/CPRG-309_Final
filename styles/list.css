@@ -1,0 +1,81 @@
+#search-main {
+    width: clamp(300px, 100% ,1200px);
+}
+#search-form {
+    text-align: end;
+    width: 100%;
+    margin-bottom: 5rem;
+}
+
+.table-input {
+    font-size: 1.5rem;
+    width: 30ch;
+    outline: none;
+    background-color: transparent;
+    color: var(--light-color);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.table-input:focus {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+#search-table {
+    width: 100%;
+}
+
+#search-table th,
+#search-table td {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+
+#search-thead th:nth-of-type(1) {
+    width:10%;
+}
+
+#search-thead th:nth-of-type(2) {
+    width: 35%;
+}
+
+#search-thead th:nth-of-type(3) {
+    width: 35%;
+}
+
+#search-thead th:nth-of-type(4) {
+    width: 20%;
+}
+
+#search-pagination {
+    align-self: flex-end;
+}
+
+#search-pagination ul {
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--light-color);
+    font-size: 1.5rem;
+    list-style: none;
+    padding: 0;
+    gap: 1rem;
+}
+#search-pagination ul a {
+    color: var(--light-color);
+    text-decoration: none;
+}
+
+#page-input {
+    width: 4ch;
+    padding: 0;
+    text-align: center;
+}
+.page {
+    width: 2ch;
+}

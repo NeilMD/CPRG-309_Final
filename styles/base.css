@@ -94,7 +94,7 @@ span, td {
     line-height: 1.5;
 }
 
-nav {
+#header-container nav {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,7 +109,7 @@ nav {
   
 }
 
-nav:after{
+#header-container nav:after{
     content: '';
     width: 160px;
     height: 40px;
@@ -122,19 +122,19 @@ nav:after{
     background-size: contain;
 }
 
-nav ul {
+#header-container nav ul {
     list-style: none;
     display: flex;
     padding: 0;
 }
 
-nav ul li {
+#header-container nav ul li {
     margin: 0 1rem;
     align-content: center;
     position: relative;
 }
 
-nav ul a {
+#header-container nav ul a {
     color: var(--gray-color); /* Initial text color */
     text-decoration: none;
     font-size: 1.5rem;
@@ -148,12 +148,16 @@ nav ul a {
     transition: color 0.5s ease-in-out;
 }
 
-nav ul a:hover {
+#header-container nav ul a:hover {
     color: var(--accent-color);
 }
 
-nav ul a:hover:after {
+#header-container nav ul a:hover:after {
     top: 0; 
+}
+
+table, th, td {
+    border-collapse: collapse;
 }
 
 footer#footer-container {
@@ -217,15 +221,21 @@ button:hover {
     cursor: pointer;
 }
 
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
 th {
     font-size: 2rem;
-
+    border-bottom: 1px solid var(--secondary-color);
 }
 
 td {
     font-size: 1.5rem;
     font-weight: 100;
-    border-bottom: 1px solid var(--secondary-color);
+    
 }
 
 th:nth-child(1) {
@@ -236,4 +246,22 @@ th:nth-child(1) {
 th, td:not(td:nth-child(1)) {
     padding: 2rem 4rem;
     text-align: center;
+}
+
+tr:has(td) {
+    color: var(--light-color);
+    cursor: pointer;
+    position: relative;
+    
+}
+
+tr:has(td) td {
+    font-weight: 100;
+    transition: font-weight 0.3s ease-in-out;
+}
+
+
+tr:has(td):hover td {
+    font-weight: 800;
+    color: var(--light-color);
 }

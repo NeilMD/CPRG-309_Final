@@ -1,0 +1,15 @@
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.d-al-center {
+    align-items: center;
+}
+
+.gap-4{
+    gap: 4rem;
+}

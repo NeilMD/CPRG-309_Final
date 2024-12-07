@@ -58,10 +58,6 @@ table th {
   text-align: left;
 }
 
-table, th, td {
-  border-collapse: collapse;
-}
-
 th{
   border-bottom: 1px solid var(--secondary-color)
 }

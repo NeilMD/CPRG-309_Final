@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/module.css">
+    <link rel="stylesheet" href="./styles/state.css">
+    <link rel="stylesheet" href="./styles/list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <script src="./scripts/initialize.js" defer></script>
+    <script src="./scripts/list.js" defer></script>
+</head>
+<body>
+    <header id="header-container"></header>
+    <main>
+        <section id="table-wrapper" class="d-flex flex-column d-al-center gap-4">
+            <header>
+                <img src="./assets/logomark.svg" width="100" height="50" >
+                <h2>Top Chart</h2>
+            </header>
+            <main id="search-main" class="d-flex flex-column d-al-center">
+                <form id="search-form">
+                    <input type="text" id="search-input" class="table-input" name="search-input" placeholder="Search Song">
+                </form>
+                <table id="search-table">
+                    <thead id="search-thead">
+                        <tr>
+                            <th >Rank</th>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>FM Link</th>
+                        </tr>
+                    </thead>
+                    <tbody id="search-tbody">
+                        <tr>
+                            <td>#1</td>
+                            <td>Nights</td>
+                            <td>Frank Ocean</td>
+                            <td>See FM Link</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>Nights</td>
+                            <td>Frank Ocean</td>
+                            <td>See FM Link</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav id="search-pagination">
+                    <ul class="pagination">
+                      <li><a href="#">&laquo; Previous</a></li>
+                      <li>
+                        <form id="page-form">
+                            <input type="text" id="page-input" class="table-input" name="page-input" placeholder="1">
+                        </form>
+                      </li>
+                      <li class="page">of</li>
+                      <li class="page"><a href="#">2</a></li>
+                      <li><a href="#">Next &raquo;</a></li>
+                    </ul>
+                  </nav>
+            </main>
+            
+        </section>
+    </main>
+    <footer id="footer-container"></footer>
+</body>
+</html>
