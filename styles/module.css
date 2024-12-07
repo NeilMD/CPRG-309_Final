@@ -27,6 +27,13 @@
     transition: opacity 0.5s ease-in-out;
 }
 
+.discover-card img {
+    transition: transform 0.5s ease-in-out;
+}
+.discover-card:hover img {
+    transform: scale(0.8);
+}
+
 .discover-card:hover:after {
     opacity: 1;
 }

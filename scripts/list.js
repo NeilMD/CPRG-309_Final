@@ -10,6 +10,7 @@ const nextBtn = document.getElementById('next-btn');
 const searchInput = document.getElementById('search-input');
 const searchTbody = document.getElementById('search-tbody');
 const lastPageDisplay = document.getElementById('last-page');
+const searchHeader = document.getElementById('search-header');
 let url;
 
 // Fetch and load data based on the current page and genre
@@ -21,7 +22,7 @@ const getPageData = async () => {
         searchInput.style.display = 'none';
         const genre = urlParams.get('genre');
         url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${genre}&api_key=${API_KEY}&limit=10&format=json`;
-
+        searchHeader.innerText = `#${genre}`
         await getData(url, fillGenreData);
     } else if (page === 'nav') { 
         // Nav > Music, Artist
