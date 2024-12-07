@@ -82,7 +82,7 @@ main {
     
     section{
         padding: 8rem 10rem;
-        scroll-snap-align: start;
+        
     }
 }
 
@@ -161,7 +161,6 @@ table, th, td {
 }
 
 footer#footer-container {
-    scroll-snap-align: start;
     padding: 2rem 4rem;
     display: flex;
     justify-content: center;

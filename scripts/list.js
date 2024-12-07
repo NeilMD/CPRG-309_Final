@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const page = urlParams.get('page');
-let url, entered = 0;
+let url;
 
 
 const getPageData = async () => {
@@ -25,8 +25,7 @@ const fillGenreData = (json) => {
     const pageInput = document.getElementById('page-input');
     let placeholderValue = pageInput ? parseInt(pageInput.getAttribute('placeholder')) || 0 : 0;
 
-    let currRank = entered ? (placeholderValue * 10) : 0;
-    entered = 1; // Flag set for next execution
+    let currRank = placeholderValue != 1 ? (placeholderValue * 10) : 0;
 
     
     if (tracks.length > 10) {
@@ -51,24 +50,36 @@ const fillGenreData = (json) => {
 }
 
 const addBehavior = ()=> {
-    let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
+    
     
 
     document.getElementById('prev-btn').addEventListener('click', async(el)=>{
+        let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
         if (el.target.classList.contains('disabled')){
             el.preventDefault();
             return;
         } 
         const urlParams = `${url}&page=${currPage-1}`;
         document.getElementById('page-input').setAttribute('placeholder', --currPage);
+        console.log(document.getElementById('page-input').getAttribute('placeholder'));
         clear();
         await getData(urlParams, fillGenreData);
     });
 
     document.getElementById('next-btn').addEventListener('click', async()=>{
-        document.getElementById('prev-btn').classList.remove('disabled');
+        let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
         const urlParams = `${url}&page=${currPage+1}`;
         document.getElementById('page-input').setAttribute('placeholder', ++currPage);
+        clear();
+        await getData(urlParams, fillGenreData);
+    });
+
+    document.getElementById('page-form').addEventListener('submit', async(el)=>{
+        el.preventDefault()
+        
+        let page = document.getElementById('page-input').value;
+        const urlParams = `${url}&page=${page}`;
+        document.getElementById('page-input').setAttribute('placeholder', page);
         clear();
         await getData(urlParams, fillGenreData);
     });
@@ -81,6 +92,8 @@ const clear = () => {
         el.remove(); // Remove all but the first row
     }
     });
+    let currPage = parseInt(document.getElementById('page-input').getAttribute('placeholder'));
+    currPage == 1  ? document.getElementById('prev-btn').classList.add('disabled') : document.getElementById('prev-btn').classList.remove('disabled');
     document.getElementById('search-input').value = '';
     document.getElementById('page-input').value = '';
 
