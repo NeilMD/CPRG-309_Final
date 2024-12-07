@@ -19,6 +19,37 @@
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
+#table-wrapper header {
+    padding: 8rem 0 0 0;
+    width: 100%;
+}
+
+#table-wrapper header h1 {
+    margin: 0;
+}
+
+#search-header {
+    font-weight: 600;
+    font-size: 7rem;
+    padding: 2rem 4rem;
+    border-radius: 100px;
+    background: var(--primary-color);
+    position: relative;
+}
+
+#search-header:after{
+    content: '';
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    z-index: -1;
+    border-radius: 100px;
+    background-image: var(--gradient);
+    animation: hue 10s infinite linear;
+}
+
 .table-input:focus {
     background-color: white;
     color: var(--primary-color);

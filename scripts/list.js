@@ -18,8 +18,6 @@ const getPageData = async () => {
     
     if (page === 'home') {
         // Hompage > Mood Genre
-
-
         searchInput.style.display = 'none';
         const genre = urlParams.get('genre');
         url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${genre}&api_key=${API_KEY}&limit=10&format=json`;

@@ -1,13 +1,13 @@
 /* Define global colors */
 :root {
     --primary-color: #000000; 
-    --accent-color: #1ED760; 
+    --accent-color: #FF6F91; 
     --secondary-color: #7b7a7a; 
     --error-color: #D71E1E;
     --light-color: #F5F5F5; 
     --gray-color: #F9F9F9;
     --header-bg: rgba(0, 0, 0, 0.17); 
-    --gradient:linear-gradient(135deg, #1ED760 0%, #007BFF 50%, #D71E1E 100%);
+    --gradient:linear-gradient(135deg, #FFF7DA 0%, #FF6F91 32%,  #6A0572 64%, #2B193D 100%);
 }
 * {
     font-family: "Nunito Sans", serif;
@@ -23,7 +23,7 @@ html {
 }
 
 h1, h2, h3, h4, h5{
-    line-height: 1,2;
+    line-height: 1.2;
 }
 
 h1 {
@@ -131,6 +131,7 @@ span, td {
     list-style: none;
     display: flex;
     padding: 0;
+    overflow: hidden;
 }
 
 #header-container nav ul li {
@@ -143,7 +144,7 @@ span, td {
     color: var(--gray-color); /* Initial text color */
     text-decoration: none;
     font-size: 1.5rem;
-    font-weight: 100;
+    font-weight: 500;
     position: relative;
     background: none;
     z-index: 1;

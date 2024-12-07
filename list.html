@@ -20,11 +20,12 @@
     <header id="header-container"></header>
     <main>
         <section id="table-wrapper" class="d-flex flex-column d-al-center gap-4">
-            <header>
-                <img src="./assets/logomark.svg" width="100" height="50" >
-                <h2>Top Chart</h2>
+            <header class="d-flex gap-2 d-al-center fj-center">
+                <img src="./assets/beats.svg" width="100" height="100" >
+                <h1>Top Chart</h1>
             </header>
             <main id="search-main" class="d-flex flex-column d-al-center">
+                <h2 id="search-header">#Jazz</h2>
                 <form id="search-form">
                     <input type="text" id="search-input" class="table-input" name="search-input" placeholder="Search Song">
                 </form>
@@ -52,12 +53,11 @@
                       <li><span id="prev-btn" class="disabled">&laquo; Previous</span></li>
                       <li>
                         <form id="page-form">
-                            <input type="number" id="page-input" class="table-input" name="page-input" placeholder="1" pattern="[0-9]{1,4}"  
-                            title="Enter a number not exceeding number of total page.">
+                            <input type="number" id="page-input" class="table-input" name="page-input" placeholder="1" title="Enter a number not exceeding number of total page.">
                         </form>
                       </li>
                       <li class="page">of</li>
-                      <li id="last-page" class="page"> 2</li>
+                      <li class="page"><span id="last-page"></span> Pages</li>
                       <li><span id="next-btn">Next &raquo;</span></li>
                     </ul>
                   </nav>

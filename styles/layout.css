@@ -13,3 +13,11 @@
 .gap-4{
     gap: 4rem;
 }
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.fj-center {
+    justify-content: center;
+}
