@@ -109,6 +109,19 @@ nav {
   
 }
 
+nav:after{
+    content: '';
+    width: 160px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1rem 2rem;
+    background-image: url('../assets/logomark.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 nav ul {
     list-style: none;
     display: flex;
@@ -144,6 +157,7 @@ nav ul a:hover:after {
 }
 
 footer#footer-container {
+    scroll-snap-align: start;
     padding: 2rem 4rem;
     display: flex;
     justify-content: center;
