@@ -171,5 +171,15 @@ const addBehavior = () => {
       window.location.href = url;
     })
   });
+
+  document.querySelectorAll('.mood-container').forEach(el => {
+    
+    const genre = el.getAttribute("data-genre");
+    const url = `./list.html?page=home&genre=${genre}`;
+    
+    el.addEventListener('click', elClick=>{     
+      window.location.href = url;
+    })
+  });
 }
 

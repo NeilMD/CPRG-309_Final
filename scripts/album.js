@@ -47,9 +47,7 @@ const fillTrackData = (track) =>{
     }
 
     let songs = typeof track === 'object' && !Array.isArray(track) ? [track] : track;
-    console.log(songs)
     for(let i = 0; i < songs.length; i++){
-        console.log('enter')
         let elTemp = document.getElementsByClassName('songs-tr')[0].cloneNode(true);
 
         elTemp.getElementsByClassName('song-num')[0].innerText = `${i+1}.`;

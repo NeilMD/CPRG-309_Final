@@ -38,31 +38,27 @@
                         </tr>
                     </thead>
                     <tbody id="search-tbody">
-                        <tr>
-                            <td>#1</td>
-                            <td>Nights</td>
-                            <td>Frank Ocean</td>
-                            <td>See FM Link</td>
+                        <tr class="search-tr">
+                            <td class="search-rank">#1</td>
+                            <td class="search-title">Nights</td>
+                            <td class="search-artist">Frank Ocean</td>
+                            <td class="search-link">See FM Link</td>
                         </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>Nights</td>
-                            <td>Frank Ocean</td>
-                            <td>See FM Link</td>
-                        </tr>
+                       
                     </tbody>
                 </table>
                 <nav id="search-pagination">
                     <ul class="pagination">
-                      <li><a href="#">&laquo; Previous</a></li>
+                      <li><span id="prev-btn" class="disabled">&laquo; Previous</span></li>
                       <li>
                         <form id="page-form">
-                            <input type="text" id="page-input" class="table-input" name="page-input" placeholder="1">
+                            <input type="text" id="page-input" class="table-input" name="page-input" placeholder="1" pattern="[0-9]"  
+                            title="Enter a number not exceeding number of total page.">
                         </form>
                       </li>
                       <li class="page">of</li>
-                      <li class="page"><a href="#">2</a></li>
-                      <li><a href="#">Next &raquo;</a></li>
+                      <li id="last-page" class="page"> 2</li>
+                      <li><span id="next-btn">Next &raquo;</span></li>
                     </ul>
                   </nav>
             </main>

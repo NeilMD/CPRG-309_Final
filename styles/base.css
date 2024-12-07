@@ -257,7 +257,12 @@ tr:has(td) {
 
 tr:has(td) td {
     font-weight: 100;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
     transition: font-weight 0.3s ease-in-out;
+    
+    
 }
 
 
