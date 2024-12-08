@@ -125,6 +125,11 @@ const fillTableRow = (tracks) => {
 
     tracks.forEach((track, index) => {
         const elTemp = document.querySelector('.search-tr').cloneNode(true);
+        elTemp.classList.add(genre);
+        elTemp.setAttribute('data-mbid',track?.mbid);
+        if(track?.mbid === "") {
+            elTemp.classList.add('no-mbid')
+        }
         elTemp.querySelector('.search-rank').textContent = `#${index + 1 + currRank}`;
         elTemp.querySelector('.search-link').innerHTML = `<a href="${track.url}">See FM Link</a>`;
 
@@ -140,6 +145,7 @@ const fillTableRow = (tracks) => {
         
         searchTbody.appendChild(elTemp);
     });
+    addBehavior();
 }
 
 
@@ -170,6 +176,18 @@ const addBehavior = () => {
         }
     });
 
+    document.querySelectorAll('tr.search-tr.artist:not(.mbid)').forEach((el) => {
+        console.log(el)
+        if ( !el.classList.contains('no-mbid')) {
+            console.log("test");
+            el.addEventListener('click', () => {
+                console.log("Clicks");
+                const mbid = el.getAttribute("data-mbid");
+                const profileUrl = `./profile.html?mbid=${mbid}`;
+                window.location.href = profileUrl;
+            });
+        }
+    });
 };
 
 // Handle page changes
@@ -198,4 +216,3 @@ const clearTableRows = () => {
 };
 
 getPageData();
-addBehavior();
