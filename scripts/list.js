@@ -5,7 +5,7 @@ const genre = urlParams.get('genre');
 
 // Elements
 const pgInput = document.getElementById('page-input');
-let currPage = parseInt(pgInput.getAttribute('placeholder')) || 1;
+let currPage = parseInt(pgInput.getAttribute('placeholder'),10) || 1;
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const searchInput = document.getElementById('search-input');
@@ -14,6 +14,7 @@ const lastPageDisplay = document.getElementById('last-page');
 const searchHeader = document.getElementById('search-header');
 const thTitle = document.getElementById('th-title');
 const thArtist = document.getElementById('th-artist');
+let latestSetMethod;
 let url;
 
 // Fetch and load data based on the current page and genre
@@ -24,27 +25,29 @@ const getPageData = async () => {
         // Hompage > Mood Genre
         searchInput.style.display = 'none';
         url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${genre}&api_key=${API_KEY}&limit=10&format=json`;
-        await getData(url, fillGenreMusicData);
+        await getData(url, setGenreMusicData);
     } else if (page === 'nav') { 
         // Nav > Music, Artist
 
         if(genre === 'music') {
             url = `https://ws.audioscrobbler.com/2.0/?method=chart.getTopTracks&api_key=${API_KEY}&limit=10&format=json`;
-            await getData(url, fillGenreMusicData);
+            latestSetMethod = setGenreMusicData;
+            await getData(url, setGenreMusicData);
 
         }else if(genre === 'artist') {
             //Change Table Header
             thArtist.innerText = 'Listeners';
             thTitle.innerText = 'Artist';
             url = `https://ws.audioscrobbler.com/2.0/?method=chart.getTopArtists&tag=${genre}&api_key=${API_KEY}&limit=10&format=json`;
-            await getData(url, fillArtistData);
+            latestSetMethod = setArtistData;
+            await getData(url, setArtistData);
         } 
         
     }
 };
 
-// Fill the table with genre and music
-const fillGenreMusicData = (json) => {
+// set genre and music data 
+const setGenreMusicData = (json) => {
     let tracks = json.tracks.track || [];
 
     const maxPage = Math.min(parseInt(json.tracks['@attr'].totalPages, 10), 1000);
@@ -54,29 +57,11 @@ const fillGenreMusicData = (json) => {
     pgInput.setAttribute('max', maxPage);
     lastPageDisplay.innerText = maxPage;
 
-    // Calculate Rank
-    let currRank = (currPage - 1) * 10;
-
-    // Clear previous rows except the template
-    clearTableRows();
-
-    if (tracks.length > 10) {
-        currRank = Math.min(currRank, tracks.length - 10);  
-        tracks = tracks.slice(currRank, currRank + 10); 
-    }
-
-    tracks.forEach((track, index) => {
-        const elTemp = document.querySelector('.search-tr').cloneNode(true);
-        elTemp.querySelector('.search-rank').textContent = `#${index + 1 + currRank}`;
-        elTemp.querySelector('.search-title').textContent = track.name;
-        elTemp.querySelector('.search-artist').textContent = track.artist.name;
-        elTemp.querySelector('.search-link').innerHTML = `<a href="${track.url}">See FM Link</a>`;
-        searchTbody.appendChild(elTemp);
-    });
+    fillTableRow(tracks);
 }
 
-// Fill the table with artist
-const fillArtistData = (json) => {
+// set artist data
+const setArtistData = (json) => {
     let tracks = json.artists.artist || [];
 
     const maxPage = Math.min(parseInt(json.artists['@attr'].totalPages, 10), 1000);
@@ -86,26 +71,72 @@ const fillArtistData = (json) => {
     pgInput.setAttribute('max', maxPage);
     lastPageDisplay.innerText = maxPage;
 
+    fillTableRow(tracks)
+}
+
+const setSearchMusic = (json) => {
+    let tracks = json.results.artistmatches.artist || [];
+
+    let tempMax = Math.floor(parseInt(json.results["opensearch:totalResults"], 10)/10)
+    const maxPage = Math.min(tempMax, 1000);
+
+    // Set Nav
+    pgInput.setAttribute('placeholder', json.results["opensearch:Query"]['startPage']);
+    pgInput.setAttribute('max', maxPage);
+    lastPageDisplay.innerText = maxPage;
+
+    fillTableRow(tracks)
+
+}
+
+const setSearchArtist = (json) => {
+    let tracks = json.results.trackmatches.track || [];
+
+    let tempMax = Math.floor(parseInt(json.results["opensearch:totalResults"], 10)/10)
+    const maxPage = Math.min(tempMax, 1000);
+
+    // Set Nav
+    pgInput.setAttribute('placeholder', json.results["opensearch:Query"]['startPage']);
+    pgInput.setAttribute('max', maxPage);
+    lastPageDisplay.innerText = maxPage;
+
+    fillTableRow(tracks)
+
+}
+
+// Fill Table Based on Data received (Genre, Music, Artist)
+const fillTableRow = (tracks) => {
     // Calculate Rank
     let currRank = (currPage - 1) * 10;
 
     // Clear previous rows except the template
     clearTableRows();
 
+    //Sanitize raw API return.
     if (tracks.length > 10) {
-        currRank = Math.min(currRank, tracks.length - 10);  
-        tracks = tracks.slice(currRank, currRank + 10); 
+        let indexCut =  Math.min(currRank, tracks.length - 10);
+        tracks = tracks.slice(indexCut, indexCut + 10); 
+
     }
 
     tracks.forEach((track, index) => {
         const elTemp = document.querySelector('.search-tr').cloneNode(true);
         elTemp.querySelector('.search-rank').textContent = `#${index + 1 + currRank}`;
-        elTemp.querySelector('.search-title').textContent = track.name;
-        elTemp.querySelector('.search-artist').textContent = parseInt(track.listeners, 10).toLocaleString();
         elTemp.querySelector('.search-link').innerHTML = `<a href="${track.url}">See FM Link</a>`;
+
+
+        if(genre === 'music') {
+            elTemp.querySelector('.search-title').textContent = track.name;
+            elTemp.querySelector('.search-artist').textContent = track.artist?.name ?? track.artist;
+        }else{
+            elTemp.querySelector('.search-title').textContent = track.name;
+            elTemp.querySelector('.search-artist').textContent = parseInt(track.listeners, 10).toLocaleString();
+        }
+        
         searchTbody.appendChild(elTemp);
     });
 }
+
 
 // Add event listeners for pagination and form submission
 const addBehavior = () => {
@@ -115,8 +146,25 @@ const addBehavior = () => {
     document.getElementById('page-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const inputPage = parseInt(pgInput.value, 10);
+        console.log(inputPage);
         if (!isNaN(inputPage)) changePage(inputPage);
     });
+
+    document.getElementById('search-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const searchVal = searchInput.value;
+        currPage = 1;
+        if(genre === 'music') {
+            url = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${searchVal}&api_key=${API_KEY}&limit=10&format=json`;
+            latestSetMethod = setSearchMusic;
+            await getData(url, setSearchMusic);
+        }else if(genre === 'artist'){
+            url = `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${searchVal}&api_key=${API_KEY}&limit=10&format=json`;
+            latestSetMethod = setSearchMusic;
+            await getData(url, setSearchMusic);
+        }
+    });
+
 };
 
 // Handle page changes
@@ -129,7 +177,7 @@ const changePage = async (newPage) => {
 
     const newUrl = `${url}&page=${newPage}`;
 
-    genre !== 'artist' ? await getData(newUrl, fillGenreMusicData) : await getData(newUrl, fillArtistData);
+    await getData(newUrl, latestSetMethod);
 };
 
 // Clear table rows except the first template row
