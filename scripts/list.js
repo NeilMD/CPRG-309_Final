@@ -25,6 +25,7 @@ const getPageData = async () => {
         // Hompage > Mood Genre
         searchInput.style.display = 'none';
         url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${genre}&api_key=${API_KEY}&limit=10&format=json`;
+        latestSetMethod = setGenreMusicData;
         await getData(url, setGenreMusicData);
     } else if (page === 'nav') { 
         // Nav > Music, Artist
@@ -74,7 +75,7 @@ const setArtistData = (json) => {
     fillTableRow(tracks)
 }
 
-const setSearchMusic = (json) => {
+const setSearchArtist = (json) => {
     let tracks = json.results.artistmatches.artist || [];
 
     let tempMax = Math.floor(parseInt(json.results["opensearch:totalResults"], 10)/10)
@@ -89,7 +90,7 @@ const setSearchMusic = (json) => {
 
 }
 
-const setSearchArtist = (json) => {
+const setSearchMusic = (json) => {
     let tracks = json.results.trackmatches.track || [];
 
     let tempMax = Math.floor(parseInt(json.results["opensearch:totalResults"], 10)/10)
@@ -160,8 +161,8 @@ const addBehavior = () => {
             await getData(url, setSearchMusic);
         }else if(genre === 'artist'){
             url = `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${searchVal}&api_key=${API_KEY}&limit=10&format=json`;
-            latestSetMethod = setSearchMusic;
-            await getData(url, setSearchMusic);
+            latestSetMethod = setSearchArtist;
+            await getData(url, setSearchArtist);
         }
     });
 
