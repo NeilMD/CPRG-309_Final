@@ -28,11 +28,25 @@ const setTotalTime = ()=>{
         totalDuration += (parseInt(result[1],10));
     });
 
+    let timeBuilder = ' | ';
+    let hours = '00';
+    if(totalDuration > 3600) {
+        hours = String(Math.floor((totalDuration / 60 )/ 60)).padStart(2,0);
+        totalDuration =totalDuration / 60;
+        timeBuilder+= `${hours} hours `
+    }
+    
     const min = String(Math.floor(totalDuration / 60)).padStart(2,0);
-    const sec = String(totalDuration % 60).padStart(2,0);
+    const sec = String(Math.floor(totalDuration % 60)).padStart(2,0);
 
+    // Concate minutes and seconds
+    min != '00' ? timeBuilder+= `${min} minutes `: null;
+    sec != '00' ? timeBuilder+= `${sec} seconds `: null;
+    
+    timeBuilder = totalDuration == 0 ? '' : timeBuilder
+    
     year.innerText = new Date().getFullYear();
-    detail.innerText = `${favorites.length} songs | ${min} minutes ${sec} seconds`
+    detail.innerText = `${favorites.length} songs${timeBuilder}`
 }
 
 const addBehavior = () => {
