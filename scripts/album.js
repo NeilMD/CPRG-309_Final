@@ -5,7 +5,7 @@ const objFav = {
     artist:'',
     duration:''
 }
-let arrFav = JSON.parse(window.localStorage.getItem(storageName));
+
 let artistName;
 
 const getAlbumData = async() => {
@@ -49,6 +49,7 @@ const fillAlbumHeader = (json) =>{
 }
 
 const fillTrackData = (track) =>{
+    let arrFav = JSON.parse(window.localStorage.getItem(storageName));
     // If no tracks
     if (!track) {
         let elNoTracks = `<tr><td id='no-tracks' colspan='4'> No Tracks Found.</td></tr>`
@@ -70,7 +71,7 @@ const fillTrackData = (track) =>{
         }
 
         // Check if already favorited
-        let exist = arrFav.findIndex(obj => {return obj.name === songs[i].name && obj.artist === artistName});
+        let exist = arrFav.findIndex(obj => {return obj.name.toLowerCase() === songs[i].name.toLowerCase() && obj.artist.toLowerCase() === artistName.toLowerCase()});
         if(exist > -1) {
            elTemp.classList.add('favorited')
         }
@@ -90,8 +91,9 @@ const setFavorite = (el) => {
     let fav = objFav;
     fav.name = el.getElementsByClassName("song-name")[0].innerText;
     fav.artist = document.getElementById("album-artist").innerText;
-    
+    let arrFav = JSON.parse(window.localStorage.getItem(storageName));
 
+    console.log('Setfav')
     if( el.classList.contains('favorited')) {
 
         let index = arrFav.findIndex(obj => obj.name === fav.name && obj.artist === fav.artist);
@@ -104,12 +106,20 @@ const setFavorite = (el) => {
         fav.duration = el.getElementsByClassName("song-duration")[0].innerText;
 
         // Avoid adding duplicate
-        let exist = arrFav.find(obj => obj.name === fav.name && obj.artist === fav.artist);
-        if(exist === undefined) {
+        let exist = arrFav.findIndex(obj => obj.name.toLowerCase() === fav.name.toLowerCase() && obj.artist.toLowerCase() === fav.artist.toLowerCase());
+        console.log(exist)
+        if(exist  === -1) {
             arrFav.push(fav);
         }
-    
-        window.localStorage.setItem(storageName, JSON.stringify(arrFav));
+        try {
+            console.log("added")
+            localStorage.setItem(storageName, JSON.stringify(arrFav));
+        } catch (e) {
+        if (e == QUOTA_EXCEEDED_ERR) {
+            alert('Quota exceeded!'); //data wasn't successfully saved due to quota exceed so throw an error
+        }
+        }
+        
         el.classList.add('favorited');
     }
     
