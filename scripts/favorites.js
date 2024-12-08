@@ -41,7 +41,10 @@ const addBehavior = () => {
         let name = el.getElementsByClassName('music-name')[0].innerText;
         let artist = el.getElementsByClassName('artist-name')[0].innerText;
         el.addEventListener('click', ()=>{
-            let index = favorites.find(el => el.name === name && el.artist === artist );
+            let index = favorites.findIndex(el => {
+                return el.name.toLowerCase() == name.toLowerCase() && el.artist.toLowerCase() == artist.toLowerCase()
+            } );
+           
             favorites.splice(index, 1);
             localStorage.setItem(storageName, JSON.stringify(favorites));
             el.classList.add('slide-out');

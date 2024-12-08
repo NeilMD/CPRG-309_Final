@@ -115,15 +115,17 @@
     cursor:not-allowed;
 }
 
+#search-pagination ul span:not(#last-page, .disabled):hover,
+.search-tr td a:hover {
+    color: var(--accent-color);
+}
+
 #search-pagination ul span.disable:not(#last-page):hover {
     color: var(--secondary-color);
     cursor:not-allowed;
 }
 
-#search-pagination ul span:not(#last-page):hover,
-.search-tr td a:hover {
-    color: var(--accent-color);
-}
+
 
 #page-input {
     width: 10ch;

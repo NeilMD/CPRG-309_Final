@@ -78,9 +78,10 @@ const setArtistData = (json) => {
 
 const setSearchArtist = (json) => {
     let tracks = json.results.artistmatches.artist || [];
-
+    
     let tempMax = Math.floor(parseInt(json.results["opensearch:totalResults"], 10)/10)
-    const maxPage = Math.min(tempMax, 1000);
+    let maxPage = Math.min(tempMax, 1000);
+    maxPage = maxPage === 0 ? 1 : maxPage; 
 
     // Set Nav
     pgInput.setAttribute('placeholder', json.results["opensearch:Query"]['startPage']);
@@ -95,7 +96,8 @@ const setSearchMusic = (json) => {
     let tracks = json.results.trackmatches.track || [];
 
     let tempMax = Math.floor(parseInt(json.results["opensearch:totalResults"], 10)/10)
-    const maxPage = Math.min(tempMax, 1000);
+    let maxPage = Math.min(tempMax, 1000);
+    maxPage = maxPage === 0 ? 1 : maxPage;
 
     // Set Nav
     pgInput.setAttribute('placeholder', json.results["opensearch:Query"]['startPage']);
