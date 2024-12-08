@@ -36,6 +36,7 @@ const getPageData = async () => {
             await getData(url, setGenreMusicData);
 
         }else if(genre === 'artist') {
+            searchInput.setAttribute('placeholder','Search Artist')
             //Change Table Header
             thArtist.innerText = 'Listeners';
             thTitle.innerText = 'Artist';
@@ -126,12 +127,13 @@ const fillTableRow = (tracks) => {
         elTemp.querySelector('.search-link').innerHTML = `<a href="${track.url}">See FM Link</a>`;
 
 
-        if(genre === 'music') {
-            elTemp.querySelector('.search-title').textContent = track.name;
-            elTemp.querySelector('.search-artist').textContent = track.artist?.name ?? track.artist;
-        }else{
+        if(genre === 'artist') {
             elTemp.querySelector('.search-title').textContent = track.name;
             elTemp.querySelector('.search-artist').textContent = parseInt(track.listeners, 10).toLocaleString();
+            
+        }else{
+            elTemp.querySelector('.search-title').textContent = track.name;
+            elTemp.querySelector('.search-artist').textContent = track.artist?.name ?? track.artist;
         }
         
         searchTbody.appendChild(elTemp);
