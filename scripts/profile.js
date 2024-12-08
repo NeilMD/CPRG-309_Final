@@ -32,7 +32,6 @@ const fillSongData = (json) => {
         elA.innerText = `${track.name} Link`
         elTd.getElementsByClassName('td-link')[0].appendChild(elA);
         elTd.getElementsByClassName('td-song')[0].innerText = track.name;
-        console.log('asd')
         document.getElementById('music-tbody').insertAdjacentElement('beforeend',elTd)
     }
     

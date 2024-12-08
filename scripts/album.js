@@ -1,4 +1,11 @@
 
+const objFav = {
+    img:'',
+    name:'',
+    artist:'',
+    duration:''
+}
+
 const getAlbumData = async() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -52,7 +59,6 @@ const fillTrackData = (track) =>{
 
         elTemp.getElementsByClassName('song-num')[0].innerText = `${i+1}.`;
         elTemp.getElementsByClassName('song-name')[0].innerText = songs[i].name;
-        console.log(songs[i].duration)
         if(songs[i].duration != null && songs[i].duration != '') {
             const min = String(Math.floor(songs[i].duration / 60)).padStart(2,0);
             const sec = String(songs[i].duration % 60).padStart(2,0);
@@ -61,6 +67,27 @@ const fillTrackData = (track) =>{
        
         document.getElementById('songs-tbody').insertAdjacentElement('beforeend',elTemp)
     }
+    addBehavior();
+}
+
+const addBehavior = () => {
+    document.querySelectorAll('.playlist-add').forEach(el => {
+        el.addEventListener('click',()=>addFavorites(el));
+    })
+}
+
+const addFavorites = (el) => {
+    let fav = objFav;
+    fav.img = document.getElementById("album-img").src;
+    fav.name = el.getElementsByClassName("song-name")[0].innerText;
+    fav.artist = document.getElementById("album-artist").innerText;
+    fav.duration = el.getElementsByClassName("song-duration")[0].innerText;
+    console.log("added")
+    console.log(fav)
+    let arrFav = JSON.parse(window.localStorage.getItem(storageName, 'beat_fa'));
+    arrFav.push(fav);
+    console.log(localStorage.length);
+    window.localStorage.setItem(storageName, JSON.stringify(arrFav));
 }
 
 getAlbumData();

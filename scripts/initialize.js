@@ -55,3 +55,9 @@ const backgroundColors = [
   '#007bff', // Blue
   '#ff5733'  // Orange
 ];
+
+const storageName = 'beat_favorites';
+if(localStorage.getItem("favorites") === null){
+  let arr = [];
+  localStorage.setItem(storageName, JSON.stringify(arr));
+};

@@ -115,12 +115,12 @@
     cursor:not-allowed;
 }
 
-#search-pagination ul span.disabled:hover {
+#search-pagination ul span.disable:not(#last-page):hover {
     color: var(--secondary-color);
     cursor:not-allowed;
 }
 
-#search-pagination ul span:hover,
+#search-pagination ul span:not(#last-page):hover,
 .search-tr td a:hover {
     color: var(--accent-color);
 }
