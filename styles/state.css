@@ -43,6 +43,14 @@
     animation: slideLeft 1s linear 1s forwards;
 }
 
+.slide-out {
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+
+
+
 
 @keyframes slideLeft {
     from {
