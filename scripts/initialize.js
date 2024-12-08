@@ -57,7 +57,7 @@ const backgroundColors = [
 ];
 
 const storageName = 'beat_favorites';
-if(localStorage.getItem("favorites") === null){
-  let arr = [];
+if(localStorage.getItem(storageName) === null){
+  let arr =[];
   localStorage.setItem(storageName, JSON.stringify(arr));
 };

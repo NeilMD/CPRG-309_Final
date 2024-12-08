@@ -82,11 +82,14 @@ const addFavorites = (el) => {
     fav.name = el.getElementsByClassName("song-name")[0].innerText;
     fav.artist = document.getElementById("album-artist").innerText;
     fav.duration = el.getElementsByClassName("song-duration")[0].innerText;
-    console.log("added")
-    console.log(fav)
-    let arrFav = JSON.parse(window.localStorage.getItem(storageName, 'beat_fa'));
-    arrFav.push(fav);
-    console.log(localStorage.length);
+    let arrFav = JSON.parse(window.localStorage.getItem(storageName));
+
+    // Avoid adding duplicate
+    let exist = arrFav.find(obj => obj.name === fav.name && obj.artist === fav.artist);
+    if(exist === undefined) {
+        arrFav.push(fav);
+    }
+   
     window.localStorage.setItem(storageName, JSON.stringify(arrFav));
 }
 
