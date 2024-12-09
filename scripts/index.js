@@ -97,7 +97,7 @@ const addGenreData = async(json) =>{
   for (let i = 0; i < tag.length; i++) {
     let el = elTemp.cloneNode(true);
     el.getElementsByClassName('mood-name')[0].innerText = tag[i].name;
-    el.setAttribute("data-genre",tag[i].name);
+    el.setAttribute("data-genre",tag[i].name.replaceAll(/\s/g,'+'));
     fragment.appendChild(el); 
     
   }

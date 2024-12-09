@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const page = urlParams.get('page');
-const genre = urlParams.get('genre');
+const genre = urlParams.get('genre').replaceAll(/\s/g,'+');
 
 // Elements
 const pgInput = document.getElementById('page-input');
@@ -20,7 +20,7 @@ let url;
 // Fetch and load data based on the current page and genre
 const getPageData = async () => {
 
-    searchHeader.innerText = `#${genre}`
+    searchHeader.innerText = `#${genre}`.replaceAll('+',' ')
     if (page === 'home') {
         // Hompage > Mood Genre
         searchInput.style.display = 'none';
