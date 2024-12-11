@@ -10,6 +10,7 @@ const fillData = async()=>{
         let el = elTemp.cloneNode(true);
         
         el.getElementsByClassName('card-img')[0].src = fav.img
+        el.getElementsByClassName('card-img')[0].setAttribute('alt',`${favname} album cover`)
         el.getElementsByClassName('music-name')[0].innerText = fav.name
         el.getElementsByClassName('artist-name')[0].innerText = fav.artist
         el.getElementsByClassName('duration')[0].innerText = fav.duration;
