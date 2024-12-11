@@ -28,6 +28,8 @@
 }
 
 .discover-card img {
+    width: 200px;
+    height: 200px;
     transition: transform 0.5s ease-in-out;
 }
 .discover-card:hover img {
