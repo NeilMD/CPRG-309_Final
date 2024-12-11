@@ -51,6 +51,7 @@ span#logo-desc{
 .member-section {
     padding: 5rem 15rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 4rem;
     align-items: center;
@@ -77,4 +78,24 @@ span#logo-desc{
     width: 370px;
     font-size: 1.5rem;
     display: block;
+}
+
+
+@media (max-width: 991px) {
+
+    main {
+        section {
+            scroll-snap-align: unset;
+        }
+    }
+
+    .member-main{
+        text-align: center;
+    }
+
+    span.main-desc{
+        text-align: center;
+        width: 100%;
+    }
+    
 }

@@ -61,3 +61,8 @@ if(localStorage.getItem(storageName) === null){
   let arr =[];
   localStorage.setItem(storageName, JSON.stringify(arr));
 };
+
+// Setting default image when image does not exist
+const defaultImg = () =>{
+  event.target.setAttribute("src","./assets/default_img.svg");
+}

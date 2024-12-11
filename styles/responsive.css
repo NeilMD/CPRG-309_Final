@@ -1,0 +1,69 @@
+@media (max-width: 1070px) {
+    main {
+        & section {
+          padding: 2rem 2rem;
+          scroll-snap-align:unset;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+
+    /* HOME */
+    #weekly-cards-container {
+        padding: 0;
+    }
+
+    /* ABOUT */
+
+}
+
+@media (max-width: 767px) {
+
+    /* HOME */
+    #weekly-cards-container {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(10, auto);
+        grid-auto-rows: unset;
+    }
+
+    /* ABOUT */
+    .member-section {
+        padding: 2rem;
+    }
+
+    .member-img {
+        width: 350px;
+        height: 350px;
+    }
+
+    #info-wrapper {
+        position: unset;
+        flex-direction: column;
+    }
+     
+}
+
+@media (max-width: 575px) {
+    .container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    /* PROFILE */
+    .music-container thead tr th:nth-of-type(4), 
+    .music-container tbody tr td:nth-of-type(4),
+    .music-container thead tr th:nth-of-type(3), 
+    .music-container tbody tr td:nth-of-type(3),
+    #search-table thead tr th:nth-of-type(4),
+    #search-table tbody tr td:nth-of-type(4){
+        display: none;
+    }
+
+    .page {
+        width: 5ch;
+        text-align: center;
+        overflow: hidden;
+        height: 1.7rem;
+    }
+}

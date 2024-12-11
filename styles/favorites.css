@@ -48,7 +48,7 @@ main {
 
 .music-card {
     display: grid;
-    grid-template-columns:minmax(2rem,6rem) 60% repeat(2,1fr);
+    grid-template-columns: 60px minmax(30%, 60%) repeat(2,1fr);
     grid-template-rows: auto auto auto;
     column-gap: 10px;
     align-items: end;
@@ -117,4 +117,13 @@ main {
     align-self: center;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
+}
+
+
+@media (max-width: 767px) {
+
+   main {
+    flex-direction: column;
+   }
+
 }

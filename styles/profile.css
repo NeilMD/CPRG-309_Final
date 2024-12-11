@@ -52,7 +52,7 @@
 
 #profile-summary {
     display: inline-block;
-    width: clamp(300px, 100ch, 100ch)
+    width: clamp(300px, 80%, 100ch);
 }
 
 .music-container {
@@ -98,4 +98,5 @@ td a:hover,
     display: flex;
     flex-wrap: wrap;
     gap: 5rem;
+    justify-content: center;
 }
