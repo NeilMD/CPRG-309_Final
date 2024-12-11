@@ -48,3 +48,43 @@
     padding: 0rem;
     margin: 0;
 }
+
+#navModal {
+    background-color: var(--primary-color);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    display: none;
+    padding: 10rem;
+    flex-direction: column;
+}
+
+#navModal header {
+    text-align: end;
+}
+
+#navModal header span i,
+#navModal div.modal-content ul li a {
+    text-decoration: none;
+    font-size: 5vw;
+    color: var(--light-color);
+    list-style: none;
+    transition: color 0.4s ease-in-out;
+}
+
+#navModal header span i:hover,
+#navModal div.modal-content ul li a:hover {
+    color: var(--accent-color);
+}
+
+#navModal div.modal-content ul li {
+   
+    color: var(--accent-color);
+}
+
+#navModal div.modal-content ul {
+    list-style: none;
+}

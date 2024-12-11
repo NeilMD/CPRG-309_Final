@@ -1,9 +1,30 @@
 <nav>
-    <ul>
+    <ul id="full-mode">
         <li><a href="./index.html">Home</a></li>
         <li><a href="./favorites.html">Favorites</a></li>
         <li><a href="./list.html?page=nav&genre=music">Music</a></li>
         <li><a href="./list.html?page=nav&genre=artist">Artist</a></li>
         <li><a href="./aboutus.html">About Us</a></li>
     </ul>
+    <ul id="burger-mode">
+        <li id="burger-nav"><i class="fa-solid fa-bars"></i></li>
+    </ul>
 </nav>
+
+<!-- The Modal -->
+<section id="navModal" class="modal">
+    <header>
+        <span class="close"><i class="fa-solid fa-xmark"></i></span>
+    </header>
+    <!-- Modal content -->
+    <div class="modal-content">
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./favorites.html">Favorites</a></li>
+            <li><a href="./list.html?page=nav&genre=music">Music</a></li>
+            <li><a href="./list.html?page=nav&genre=artist">Artist</a></li>
+            <li><a href="./aboutus.html">About Us</a></li>
+        </ul>
+       
+    </div>
+</section>

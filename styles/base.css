@@ -104,7 +104,7 @@ span, td {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, var(--header-bg), transparent);
+    background: var(--primary-color);
     padding: 0.5rem 3rem;
     position: fixed; /* Make the header float */
     top: 0;
@@ -155,7 +155,25 @@ span, td {
     transition: color 0.5s ease-in-out;
 }
 
-#header-container nav ul a:hover {
+#header-container nav ul#burger-mode {
+    display: none
+}
+
+#burger-nav {
+    color: var(--gray-color); /* Initial text color */
+    font-size: 2rem;
+    font-weight: 500;
+    position: relative;
+    background: none;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    background-clip: text;
+    transition: color 0.5s ease-in-out;
+}
+
+#header-container nav ul a:hover,
+#burger-nav:hover {
     color: var(--accent-color);
 }
 
@@ -225,11 +243,12 @@ button {
     transition-timing-function: ease-in-out;
 }
 
-button:hover {
+button:hover{
     color: var(--light-color);
     opacity: 100%;
     cursor: pointer;
 }
+
 
 
 table {
@@ -274,7 +293,6 @@ tr:has(td) td {
     
     
 }
-
 
 tr:has(td):hover td {
     font-weight: 800;

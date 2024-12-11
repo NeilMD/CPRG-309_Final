@@ -41,7 +41,19 @@
         position: unset;
         flex-direction: column;
     }
-     
+    
+    /* HEADER */
+    #header-container nav ul#full-mode {
+        display: none;
+    }
+    #header-container nav ul#burger-mode {
+        display: block;
+    }
+
+    #header-container nav {
+        z-index: 2;
+        justify-content: end;
+    }
 }
 
 @media (max-width: 575px) {
