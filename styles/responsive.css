@@ -13,8 +13,9 @@
     #weekly-cards-container {
         padding: 0;
     }
-
-    /* ABOUT */
+    .member-section {
+        flex-wrap: wrap;
+    }
 
 }
 
@@ -82,6 +83,10 @@
     footer#footer-container {
         flex-direction: column;
         align-items: center;
+    }
+
+    #info-wrapper:has(header#album-header) {
+        flex-direction: column;
     }
 
 }

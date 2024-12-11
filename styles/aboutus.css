@@ -51,7 +51,6 @@ span#logo-desc{
 .member-section {
     padding: 5rem 15rem;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 4rem;
     align-items: center;
