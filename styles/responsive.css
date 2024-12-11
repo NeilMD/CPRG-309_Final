@@ -37,7 +37,7 @@
         height: 350px;
     }
 
-    #info-wrapper {
+    #info-wrapper:not(:has(header#album-header)) {
         position: unset;
         flex-direction: column;
     }
