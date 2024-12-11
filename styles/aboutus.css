@@ -56,6 +56,10 @@ span#logo-desc{
     align-items: center;
 }
 
+.member-name {
+    font-weight: 800;
+}
+
 .member-section:nth-of-type(even) {
     flex-direction: row-reverse;
 }
