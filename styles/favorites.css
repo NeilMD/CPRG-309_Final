@@ -33,6 +33,11 @@ main {
     animation: hue 10s ease-in-out forwards infinite;
 }
 
+#info-wrapper img {
+    width: 250px;
+    height: 250px;
+}
+
 #music-wrapper {
     flex-basis: 50%;
     display: flex;
